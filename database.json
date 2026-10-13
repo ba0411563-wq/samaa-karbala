@@ -1,0 +1,44 @@
+[
+  {
+    "badgeNumber": "33442",
+    "fullName": "محمد علوان محمد",
+    "role": "Worker",
+    "currentLocation": "مزرعه 3",
+    "allergies": "بنسلين",
+    "chronicDiseases": "ربو"
+  },
+  {
+    "badgeNumber": "12345",
+    "fullName": "حسين علي حسين",
+    "role": "عامل مزرعة / Farm Worker",
+    "currentLocation": "مزرعه 3",
+    "allergies": "بنسلين / Penicillin",
+    "chronicDiseases": "الربو / Asthma"
+  },
+  {
+    "badgeNumber": "7412",
+    "fullName": "سعد معن امير",
+    "role": "عامل مزرعة / Farm Worker",
+    "currentLocation": "مزرعه 3",
+    "allergies": "بنسلين / Penicillin",
+    "chronicDiseases": "السكري / Diabetes"
+  },
+  {
+    "badgeNumber": "2000",
+    "fullName": "حسن سلمان احمد",
+    "role": "عامل مزرعة / Farm Worker",
+    "currentLocation": "مزرعه 5",
+    "allergies": "لا يوجد / None",
+    "chronicDiseases": "السكري / Diabetes"
+  },
+  {
+    "id": "1791849034500",
+    "badgeNumber": "4000",
+    "fullName": "علي صدام حسين",
+    "role": "عامل مزرعة / Farm Worker",
+    "currentLocation": "مفقس 1 / Hatchery 1",
+    "allergies": "بنسلين / Penicillin",
+    "chronicDiseases": "ضغط الدم / Hypertension",
+    "createdAt": "2026-10-12T23:50:34.501Z"
+  }
+]

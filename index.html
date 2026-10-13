@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة سماء كربلاء للإنتاج الزراعي والحيواني - نظام الطبابة والعمليات</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #2980b9;
+            --success: #27ae60;
+            --warning: #e67e22;
+            --danger: #c0392b;
+            --bg: #f4f7f6;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 1250px; margin: auto; background: white; padding: 25px; border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+        
+        h2, h3, h4 { color: var(--primary); border-bottom: 2px solid #eaeaea; padding-bottom: 10px; font-weight: 700; }
+        
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; color: #444; }
+        input, select, textarea { width: 100%; padding: 11px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; background: #fff; transition: 0.3s; }
+        input:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 5px rgba(41, 128, 185, 0.3); }
+
+        button { color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold; transition: 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        button:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        .gateway-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 25px 0; }
+        .gateway-card { background: #fff; border: 2px solid #e0e0e0; border-radius: 12px; padding: 22px 12px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .gateway-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+        .gateway-icon { font-size: 38px; margin-bottom: 8px; }
+
+        .section-view { display: none; }
+        .back-btn { background-color: #7f8c8d; margin-bottom: 15px; }
+
+        .btn-green { background-color: var(--success); width: 100%; }
+        .btn-blue { background-color: var(--accent); }
+        .btn-orange { background-color: var(--warning); }
+        .btn-danger { background-color: var(--danger); padding: 8px 14px; font-size: 13px; }
+        .btn-info { background-color: #8e44ad; padding: 5px 10px; font-size: 12px; }
+
+        .global-announcement-banner { background: #f39c12; color: white; padding: 14px 20px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; display: flex; align-items: center; gap: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+
+        .whatsapp-container { display: grid; grid-template-columns: 280px 1fr 300px; background: #fff; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; height: 480px; margin-top: 15px; }
+        .whatsapp-sidebar { background: #f8f9fa; border-left: 1px solid #ddd; display: flex; flex-direction: column; }
+        .whatsapp-search { padding: 10px; border-bottom: 1px solid #ddd; background: #fff; }
+        .whatsapp-chats-list { overflow-y: auto; flex-grow: 1; }
+        .chat-contact-item { padding: 12px 15px; border-bottom: 1px solid #eee; cursor: pointer; transition: 0.2s; }
+        .chat-contact-item:hover, .chat-contact-item.active { background: #eef2f5; }
+        
+        .whatsapp-chat-body { display: flex; flex-direction: column; background: #e5ddd5; border-left: 1px solid #ddd; }
+        .whatsapp-messages-area { flex-grow: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .wa-bubble { max-width: 75%; padding: 10px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.5; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .wa-bubble-incoming { background: #fff; align-self: flex-start; }
+        .wa-bubble-outgoing { background: #dcf8c6; align-self: flex-end; }
+        .whatsapp-input-box { padding: 10px; background: #f0f0f0; display: flex; gap: 10px; align-items: center; }
+
+        .chat-user-profile-panel { background: #fafafa; padding: 15px; overflow-y: auto; font-size: 13px; line-height: 1.8; }
+
+        .filter-buttons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 15px 0; }
+        .filter-btn { background: #f8f9fa; border: 1px solid #ced4da; color: var(--primary); padding: 12px; border-radius: 10px; cursor: pointer; font-weight: bold; text-align: center; transition: 0.2s; }
+        .filter-btn:hover { background: #e9ecef; }
+        .filter-btn.active { background: var(--accent); color: white; border-color: #1b6aaa; box-shadow: 0 3px 8px rgba(41, 128, 185, 0.3); }
+        .badge-count { background: var(--danger); color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin-right: 6px; }
+
+        .section-box { background: #fafafa; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #eaeaea; }
+        .table-container { width: 100%; overflow-x: auto; margin-top: 15px; border-radius: 8px; border: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; background: #fff; }
+        th, td { border: 1px solid #e9ecef; padding: 12px; text-align: right; font-size: 13.5px; }
+        th { background-color: #f1f3f5; color: var(--primary); font-weight: bold; }
+
+        .health-bar-container { background: #e9ecef; border-radius: 10px; height: 16px; width: 100%; overflow: hidden; margin: 15px 0; display: flex; }
+        .bar-healthy { background: var(--success); height: 100%; }
+        .bar-chronic { background: var(--danger); height: 100%; }
+
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 5px; background: #fff; padding: 12px; border: 1px solid #ccc; border-radius: 8px; }
+        .checkbox-item { display: flex; align-items: center; gap: 6px; font-weight: normal; font-size: 14px; cursor: pointer; width: 45%; }
+        .checkbox-item input { width: auto; }
+
+        .tab-btn { background: #e0e0e0; color: #333; padding: 10px 15px; border-radius: 8px; cursor: pointer; border: none; font-weight: bold; }
+        .tab-btn.active { background: var(--accent); color: white; }
+
+        #singleReportCard { display: none; background: white; padding: 30px; border: 3px double #2c3e50; border-radius: 12px; margin-top: 20px; }
+        .company-header { text-align: center; border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 20px; display: none; }
+        .company-header h2 { margin: 0; color: var(--primary); border: none; }
+        .company-header p { margin: 5px 0 0; color: #666; font-size: 14px; }
+
+        @media print {
+            body * { visibility: hidden; }
+            #printableArea, #printableArea *, #singleReportCard, #singleReportCard *, .company-header { visibility: visible; }
+            #printableArea, #singleReportCard { position: absolute; left: 0; top: 0; width: 100%; }
+            .company-header { display: block !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="company-header">
+        <h2>شركة سماء كربلاء للإنتاج الزراعي والحيواني</h2>
+        <p>Samaa Karbala Agricultural & Animal Production Co.</p>
+    </div>
+
+    <h2 class="no-print">🏢 شركة سماء كربلاء للإنتاج الزراعي والحيواني - Samaa Karbala System</h2>
+
+    <div id="globalAnnouncementBanner" class="global-announcement-banner">
+        <span>📢 تعميم رسمي:</span>
+        <div id="bannerTextContent" style="flex-grow: 1;">أهلاً بكم في نظام الطبابة والعمليات - شركة سماء كربلاء</div>
+    </div>
+
+    <!-- 🚪 البوابات الأربع الرئيسية -->
+    <div id="homeGateway" class="gateway-grid">
+        <div class="gateway-card" onclick="openSection('empSection')">
+            <div class="gateway-icon">👷</div>
+            <h4>بوابة الموظفين</h4>
+            <p style="font-size: 11px; color: #666;">دخول برقم الباج أو تسجيل جديد</p>
+        </div>
+
+        <div class="gateway-card" onclick="openSection('driverRegSection')" style="border-color: var(--success);">
+            <div class="gateway-icon">📝</div>
+            <h4>تسجيل سائق جديد</h4>
+            <p style="font-size: 11px; color: #666;">New Driver Registration</p>
+        </div>
+
+        <div class="gateway-card" onclick="openSection('driverPortalSection')" style="border-color: var(--warning);">
+            <div class="gateway-icon">🚚</div>
+            <h4>بوابة السواق</h4>
+            <p style="font-size: 11px; color: #666;">Drivers Portal</p>
+        </div>
+
+        <div class="gateway-card" onclick="openMedicLogin()" style="border-color: var(--danger);">
+            <div class="gateway-icon">🩺</div>
+            <h4>غرفة الطبابة</h4>
+            <p style="font-size: 11px; color: #666;">Medical Command</p>
+        </div>
+    </div>
+
+    <!-- 👷 1. بوابة الموظفين -->
+    <div id="empSection" class="section-view">
+        <button class="back-btn" onclick="goHome()">⬅️ رجوع / Back</button>
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <button class="tab-btn active" id="tabLogin" onclick="switchEmpTab('login')">🔑 دخول موظف مسجل (برقم الباج)</button>
+            <button class="tab-btn" id="tabRegister" onclick="switchEmpTab('register')">📝 تسجيل موظف جديد</button>
+        </div>
+
+        <div id="empLoginBox" class="section-box" style="border: 2px solid var(--accent); background: #eef9ff;">
+            <h3>🔑 دخول الموظف المسجل مسبقاً</h3>
+            <div class="form-group">
+                <label>🆔 أدخل رقم الباج الوظيفي:</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="loginEmpBadgeInput" placeholder="أدخل رقم الباج هنا... Ex: 1001">
+                    <button type="button" onclick="loginEmployeeByBadge()" class="btn-blue" style="width: 130px; margin-top:0;">دخول</button>
+                </div>
+            </div>
+
+            <div id="empProfileCard" style="display: none; margin-top: 15px; background: #fff; padding: 15px; border-radius: 8px;">
+                <h4>👤 أهلاً بك: <span id="cardEmpName" style="color:var(--accent);"></span></h4>
+                <p>🆔 رقم الباج: <strong id="cardEmpBadge"></strong> | 🌍 الجنسية: <strong id="cardEmpNat"></strong></p>
+                <p>💼 الصفة: <strong id="cardEmpRole"></strong> | 📍 الموقع: <strong id="cardEmpLoc"></strong></p>
+                <p>🩺 الحالة الصحية: <span id="cardEmpHealth" style="color: red; font-weight: bold;"></span></p>
+                
+                <div style="margin-top: 15px;">
+                    <h4>💬 إرسال طلب علاج لغرفة الطبابة:</h4>
+                    <textarea id="cardEmpMsgText" rows="2" placeholder="اكتب طلب العلاج هنا..."></textarea>
+                    <button type="button" onclick="sendEmpDirectMessage()" class="btn-blue" style="margin-top: 10px;">📨 إرسال للطبابة</button>
+                    <div id="cardMsgStatus" style="margin-top: 6px; font-weight: bold;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="empRegisterBox" class="section-box" style="display: none;">
+            <h3>📝 تسجيل موظف جديد لأول مرة</h3>
+            <form id="empForm">
+                <div class="form-group"><label>🆔 رقم الباج / Badge:</label><input type="text" id="empBadge" required placeholder="Ex: 1001"></div>
+                <div class="form-group"><label>👤 الاسم الكامل / Full Name:</label><input type="text" id="empName" required placeholder="الاسم الثلاثي"></div>
+                <div class="form-group">
+                    <label>🌍 الجنسية / Nationality:</label>
+                    <select id="empNationality" required>
+                        <option value="عراقي / Iraqi">🇮🇶 عراقي / Iraqi</option>
+                        <option value="مصري / Egyptian">🇪🇬 مصري / Egyptian</option>
+                        <option value="أجنبي / Foreigner">🌐 أجنبي / Foreigner</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>💼 الصفة الوظيفية / Role:</label>
+                    <select id="empRole">
+                        <option value="عامل مزرعة / Site Worker">👷 عامل مزرعة / Site Worker</option>
+                        <option value="مدير موقع / Site Manager">👨‍💼 مدير موقع / Site Manager</option>
+                        <option value="مهندس فني / Technical Engineer">⚙️ مهندس فني / Technical Engineer</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>📍 المزرعة أو الموقع / Location:</label><select id="empLocation" class="location-list" required></select></div>
+                
+                <div class="form-group">
+                    <label>🩺 الأمراض المزمنة (ضع علامة صح):</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="healthCond" value="ضغط الدم"> ضغط الدم</label>
+                        <label class="checkbox-item"><input type="checkbox" name="healthCond" value="السكر"> السكر</label>
+                        <label class="checkbox-item"><input type="checkbox" name="healthCond" value="الربو"> الربو</label>
+                        <label class="checkbox-item"><input type="checkbox" name="healthCond" value="قرحة المعدة"> قرحة المعدة</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>⚠️ الحساسية الدوائية (ضع علامة صح):</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="healthCond" value="حساسية البنسلين"> حساسية البنسلين</label>
+                        <label class="checkbox-item"><input type="checkbox" name="healthCond" value="حساسية ديكلوفيناك الصوديوم"> حساسية ديكلوفيناك الصوديوم</label>
+                        <label class="checkbox-item"><input type="checkbox" name="healthCond" value="حساسية سيفتركسون"> حساسية سيفتركسون</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>❓ أمراض أو أدوية أو حساسيات أخرى (إن وجدت):</label>
+                    <input type="text" id="otherHealthText" placeholder="اكتب العلاج أو الحساسية الأخرى هنا...">
+                </div>
+
+                <button type="submit" class="btn-green">💾 حفظ الموظف الجديد</button>
+            </form>
+            <div id="empMsg" style="margin-top: 10px; font-weight: bold;"></div>
+        </div>
+    </div>
+
+    <!-- 📝 2. تسجيل سائق جديد -->
+    <div id="driverRegSection" class="section-view">
+        <button class="back-btn" onclick="goHome()">⬅️ رجوع / Back</button>
+        <div class="section-box" style="border: 2px solid var(--success);">
+            <h3 style="color: var(--success);">📝 تسجيل سائق جديد</h3>
+            <form id="driverRegForm">
+                <div class="form-group"><label>🆔 رقم الباج:</label><input type="text" id="regDriverBadge" required placeholder="Ex: 7007"></div>
+                <div class="form-group"><label>👤 اسم السائق الكامل:</label><input type="text" id="regDriverName" required placeholder="Full Name"></div>
+                <div class="form-group">
+                    <label>🌍 الجنسية:</label>
+                    <select id="driverNationality">
+                        <option value="عراقي / Iraqi">🇮🇶 عراقي / Iraqi</option>
+                        <option value="مصري / Egyptian">🇪🇬 مصري / Egyptian</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>🕒 الشفت:</label>
+                    <select id="driverShift">
+                        <option value="نهاري / Day Shift">☀️ نهاري / Day Shift</option>
+                        <option value="ليلي / Night Shift">🌙 ليلي / Night Shift</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>🚛 رقم الشاحنة:</label><input type="text" id="regDriverVehicle" required placeholder="Ex: Truck 14"></div>
+                <button type="submit" class="btn-green">💾 تسجيل السائق</button>
+            </form>
+            <div id="driverRegMsg" style="margin-top: 10px; font-weight: bold;"></div>
+        </div>
+    </div>
+
+    <!-- 🚚 3. بوابة السواق -->
+    <div id="driverPortalSection" class="section-view">
+        <button class="back-btn" onclick="goHome()">⬅️ رجوع / Back</button>
+        <div class="section-box" style="border: 2px solid var(--warning); background: #fef9e7;">
+            <h3 style="color: #d35400;">🚚 بوابة السواق والخطوط</h3>
+            <div class="form-group"><label>🆔 أدخل رقم الباج:</label><input type="text" id="loginDriverBadge" placeholder="Badge Number..."></div>
+            <button type="button" onclick="loginDriver()" class="btn-blue">دخول السائق</button>
+            <div id="driverCardBox" style="display:none; margin-top:15px; background:#fff; padding:15px; border-radius:8px;">
+                <h4>👤 أهلاً بك: <span id="driverCardName" style="color: var(--accent);"></span></h4>
+                <div class="form-group"><label>📍 تحديث موقعك اليومي:</label><select id="driverDailyLoc" class="location-list"></select></div>
+                <button type="button" onclick="saveDriverConfig()" class="btn-orange">💾 حفظ الموقع</button>
+                <div id="driverConfigMsg" style="margin-top:8px; font-weight:bold;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🩺 4. غرفة الطبابة المركزية -->
+    <div id="medicSection" class="section-view">
+        <button class="back-btn" onclick="goHome()">⬅️ تسجيل الخروج</button>
+
+        <div id="singleReportCard">
+            <div style="text-align: center; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; margin-bottom: 15px;">
+                <h2 style="margin:0; color:#2c3e50;">شركة سماء كربلاء للإنتاج الزراعي والحيواني</h2>
+                <p style="margin:5px 0 0; color:#555;">Samaa Karbala Co. - Individual Medical Report</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-bottom: 15px;">
+                <strong>رقم التقرير: #<span id="rptId"></span></strong>
+                <span style="font-size: 12px; color: #555;">التاريخ: <span id="rptDate"></span></span>
+            </div>
+            <div style="margin-top: 15px; font-size: 15px; line-height: 2;">
+                <p><strong>👤 الاسم الكامل:</strong> <span id="rptName"></span></p>
+                <p><strong>🆔 الرقم الوظيفي:</strong> <span id="rptBadge"></span></p>
+                <p><strong>🌍 الجنسية:</strong> <span id="rptNationality"></span></p>
+                <p><strong>💼 الصفة الوظيفية:</strong> <span id="rptRole"></span></p>
+                <p><strong>📍 الموقع الحالي:</strong> <span id="rptLoc"></span></p>
+                <p><strong>🩺 الحالة الصحية:</strong> <span id="rptHealth" style="color: red; font-weight: bold;"></span></p>
+            </div>
+            <div style="margin-top: 40px; display: flex; justify-content: space-between;">
+                <div>توقيع المسؤول الطبي: ....................</div>
+                <div>ختم الشركة الرسمي</div>
+            </div>
+            <div class="no-print" style="margin-top: 20px;">
+                <button onclick="window.print()" class="btn-green">🖨️ طباعة التقرير الفردي PDF</button>
+                <button onclick="closeSingleReport()" class="btn-blue">إغلاق</button>
+            </div>
+        </div>
+
+        <div class="section-box" style="background: #f0f4f8;" id="printableArea">
+            <h3 style="border-bottom: 2px solid #2c3e50; padding-bottom: 8px;">🩺 غرفة الطبابة المركزية</h3>
+
+            <!-- 🔍 البحث الشامل برقم الباج -->
+            <div class="section-box no-print" style="background: #fff; border: 2px solid var(--primary);">
+                <h4 style="margin-top: 0; color: var(--primary);">🔎 البحث الشامل برقم الباج:</h4>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="searchBadgeInput" placeholder="أدخل رقم الباج..." onkeyup="searchByBadgeEngine()">
+                    <button type="button" onclick="searchByBadgeEngine()" class="btn-blue" style="width: 130px; margin-top: 0;">بحث</button>
+                </div>
+                <div id="searchBadgeResultBox" style="margin-top: 12px; display: none; background: #eef9ff; padding: 15px; border-radius: 6px; border: 1px solid #bce8f1;"></div>
+            </div>
+
+            <!-- 📢 نشر إعلان -->
+            <div class="section-box no-print" style="background: #fef9e7; border: 2px solid #f39c12;">
+                <h4 style="margin-top: 0; color: #d35400;">📢 نشر إعلان أو تعميم عام للشركة:</h4>
+                <div class="form-group"><textarea id="globalAnnouncementInput" rows="2" placeholder="اكتب الإعلان هنا..."></textarea></div>
+                <button type="button" onclick="publishGlobalAnnouncement()" class="btn-orange">📢 نشر التوجيه العام</button>
+                <div id="announcementStatus" style="margin-top: 6px; font-weight: bold; color: var(--success);"></div>
+            </div>
+
+            <!-- 🏗️ إضافة موقع جديد -->
+            <div class="section-box no-print" style="background: #eef9ff; border: 2px solid var(--accent);">
+                <h4 style="margin-top: 0; color: var(--accent);">🏗️ إضافة موقع جديد للقائمة:</h4>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="newLocInput" placeholder="اسم الموقع...">
+                    <button type="button" onclick="addNewLocation()" class="btn-blue" style="width: 180px; margin-top: 0;">➕ إضافة موقع</button>
+                </div>
+                <div id="newLocMsg" style="margin-top: 8px; font-weight: bold; color: var(--success);"></div>
+            </div>
+
+            <!-- 📊 مؤشر الصحة العامة -->
+            <div class="no-print">
+                <label>📊 مؤشر الصحة العامة للشركة:</label>
+                <div class="health-bar-container">
+                    <div id="barHealthy" class="bar-healthy" title="Healthy"></div>
+                    <div id="barChronic" class="bar-chronic" title="Chronic"></div>
+                </div>
+            </div>
+
+            <!-- 🔍 الفلاتر الطبية السريعة -->
+            <h4 style="margin-top: 15px;" class="no-print">🔍 التصنيف السريع والفلاتر الطبية:</h4>
+            <div class="filter-buttons-grid no-print">
+                <div class="filter-btn active" onclick="filterByCategory('الكل', this)">📋 الكل <span id="cnt_all" class="badge-count">0</span></div>
+                <div class="filter-btn" onclick="filterByCategory('ضغط الدم', this)">🩺 ضغط <span id="cnt_bp" class="badge-count">0</span></div>
+                <div class="filter-btn" onclick="filterByCategory('السكر', this)">🩸 السكر <span id="cnt_sug" class="badge-count">0</span></div>
+                <div class="filter-btn" onclick="filterByCategory('الربو', this)">💨 الربو <span id="cnt_asthma" class="badge-count">0</span></div>
+                <div class="filter-btn" onclick="filterByCategory('قرحة المعدة', this)">🩹 القرحة <span id="cnt_ulcer" class="badge-count">0</span></div>
+                <div class="filter-btn" onclick="filterByCategory('حساسية البنسلين', this)">⚠️ بنسلين <span id="cnt_pen" class="badge-count">0</span></div>
+                <div class="filter-btn" onclick="filterByCategory('حساسية ديكلوفيناك الصوديوم', this)">⚠️ ديكلوفيناك <span id="cnt_dic" class="badge-count">0</span></div>
+                <div class="filter-btn" onclick="filterByCategory('أخرى', this)">❓ أخرى <span id="cnt_oth" class="badge-count">0</span></div>
+            </div>
+
+            <!-- أزرار العمليات -->
+            <div style="margin: 15px 0; display: flex; gap: 10px; flex-wrap: wrap;" class="no-print">
+                <button onclick="loadAdminPanel()" class="btn-blue">🔄 تحديث البيانات</button>
+                <button onclick="window.print()" class="btn-orange" style="background-color: var(--success);">🖨️ طباعة وتصدير PDF</button>
+                <button onclick="changeMedicPassword()" class="btn-orange" style="background-color: #8e44ad;">⚙️ تغيير رمز الدخول</button>
+            </div>
+
+            <h4 id="currentFilterTitle" style="color: var(--accent); margin-top: 20px;">عرض الفئة: (الكل)</h4>
+            <div class="table-container">
+                <table id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>الباج</th>
+                            <th>الاسم الكامل</th>
+                            <th>الجنسية</th>
+                            <th>الصفة</th>
+                            <th>الموقع</th>
+                            <th>الحالة الصحية</th>
+                            <th class="no-print">إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody"></tbody>
+                </table>
+            </div>
+
+            <!-- 💬 الواتساب والدردشة -->
+            <div class="section-box no-print" style="background: #fff; border: 2px solid var(--primary); margin-top: 30px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eaeaea; padding-bottom: 10px; margin-bottom: 10px;">
+                    <h4 style="margin: 0; color: var(--primary);">💬 نظام المراسلات المباشرة:</h4>
+                    <button onclick="clearChatArchive()" class="btn-danger">🧹 تفريغ المحادثات</button>
+                </div>
+                
+                <div class="whatsapp-container">
+                    <div class="whatsapp-sidebar">
+                        <div class="whatsapp-search"><input type="text" id="chatSearchInput" onkeyup="filterWhatsAppChats()" placeholder="🔍 ابحث..."></div>
+                        <div class="whatsapp-chats-list" id="whatsappContactsList"></div>
+                    </div>
+                    <div class="whatsapp-chat-body">
+                        <div id="activeChatHeader" style="background: #075e54; color: white; padding: 10px 15px; font-weight: bold; font-size: 14px;">اختر محادثة...</div>
+                        <div class="whatsapp-messages-area" id="whatsappMessagesArea"><div style="text-align: center; color: #777; margin-top: 50px;">اختر مراسلاً من القائمة</div></div>
+                        <div class="whatsapp-input-box" id="whatsappInputBox" style="display: none;">
+                            <input type="text" id="adminReplyMsgText" placeholder="اكتب الرد..." style="flex-grow: 1; margin:0;">
+                            <button type="button" onclick="sendAdminReply()" class="btn-green" style="margin:0; width: 100px;">إرسال</button>
+                        </div>
+                    </div>
+                    <div class="chat-user-profile-panel" id="chatUserProfilePanel">
+                        <h4 style="margin-top:0; color: var(--primary); border-bottom: 1px solid #ccc; padding-bottom: 5px;">📋 الملف الطبي</h4>
+                        <div style="color: #666; font-size: 12px;">اختر مراسلاً لعرض الملف...</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const API_URL = 'http://localhost:5000/api/users';
+    const LOC_URL = 'http://localhost:5000/api/locations';
+    const ALERTS_URL = 'http://localhost:5000/api/alerts';
+    let globalUsers = [];
+    let globalAlerts = [];
+    let currentCategoryFiltered = [];
+    let currentSelectedCategory = 'الكل';
+    let activeChatBadge = null;
+    let loggedInEmp = null;
+
+    window.onload = function() {
+        loadLocations();
+        checkGlobalAnnouncement();
+    };
+
+    function openSection(id) {
+        document.getElementById('homeGateway').style.display = 'none';
+        document.querySelectorAll('.section-view').forEach(sec => sec.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function goHome() {
+        document.getElementById('homeGateway').style.display = 'grid';
+        document.querySelectorAll('.section-view').forEach(sec => sec.style.display = 'none');
+        checkGlobalAnnouncement();
+    }
+
+    function getMedicPin() {
+        return localStorage.getItem('SK_MEDIC_PIN') || '1234';
+    }
+
+    function openMedicLogin() {
+        let currentPin = getMedicPin();
+        let pin = prompt('أدخل الرمز السري لغرفة الطبابة:');
+        if (pin === currentPin) {
+            openSection('medicSection');
+            loadAdminPanel();
+        } else if (pin !== null) {
+            alert('❌ الرمز غير صحيح');
+        }
+    }
+
+    function changeMedicPassword() {
+        let currentPin = getMedicPin();
+        let oldPin = prompt('أدخل الرمز السري الحالي لغرفة الطبابة:');
+        if (oldPin === currentPin) {
+            let newPin = prompt('أدخل الرمز السري الجديد:');
+            if (newPin && newPin.trim() !== '') {
+                localStorage.setItem('SK_MEDIC_PIN', newPin.trim());
+                alert('✅ تم تغيير الرمز السري بنجاح!');
+            }
+        } else if (oldPin !== null) {
+            alert('❌ الرمز الحالي غير صحيح!');
+        }
+    }
+
+    function switchEmpTab(tab) {
+        if (tab === 'login') {
+            document.getElementById('empLoginBox').style.display = 'block';
+            document.getElementById('empRegisterBox').style.display = 'none';
+            document.getElementById('tabLogin').classList.add('active');
+            document.getElementById('tabRegister').classList.remove('active');
+        } else {
+            document.getElementById('empLoginBox').style.display = 'none';
+            document.getElementById('empRegisterBox').style.display = 'block';
+            document.getElementById('tabRegister').classList.add('active');
+            document.getElementById('tabLogin').classList.remove('active');
+        }
+    }
+
+    async function loginEmployeeByBadge() {
+        const badge = document.getElementById('loginEmpBadgeInput').value.trim();
+        if (!badge) { alert('أدخل رقم الباج أولاً'); return; }
+        try {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            const user = (data.users || []).find(u => String(u.badgeNumber) === badge);
+            if (!user) { alert('❌ الموظف غير مسجل برقم الباج هذا.'); return; }
+            
+            loggedInEmp = user;
+            document.getElementById('cardEmpName').innerText = user.fullName;
+            document.getElementById('cardEmpBadge').innerText = user.badgeNumber;
+            document.getElementById('cardEmpNat').innerText = user.nationality;
+            document.getElementById('cardEmpRole').innerText = user.role;
+            document.getElementById('cardEmpLoc').innerText = user.currentLocation;
+            document.getElementById('cardEmpHealth').innerText = user.allergies;
+            document.getElementById('empProfileCard').style.display = 'block';
+        } catch(e) { alert('تأكد من تشغيل السيرفر node server.js'); }
+    }
+
+    async function sendEmpDirectMessage() {
+        if (!loggedInEmp) return;
+        const msg = document.getElementById('cardEmpMsgText').value.trim();
+        if (!msg) { alert('اكتب نص الطلب'); return; }
+        try {
+            const res = await fetch(ALERTS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ badgeNumber: loggedInEmp.badgeNumber, category: 'موظف', message: msg, recipient: 'غرفة الطبابة المركزية' })
+            });
+            if (res.ok) {
+                document.getElementById('cardMsgStatus').innerText = '✅ تم إرسال الطلب للطبابة بنجاح!';
+                document.getElementById('cardEmpMsgText').value = '';
+            }
+        } catch(e){}
+    }
+
+    async function checkGlobalAnnouncement() {
+        try {
+            const res = await fetch(ALERTS_URL);
+            const data = await res.json();
+            const alerts = data.alerts || [];
+            const announcement = alerts.find(a => a.category === 'إعلان عام');
+            if (announcement) {
+                document.getElementById('bannerTextContent').innerText = announcement.message;
+            }
+        } catch(e) {}
+    }
+
+    async function publishGlobalAnnouncement() {
+        const text = document.getElementById('globalAnnouncementInput').value.trim();
+        if (!text) { alert('الرجاء كتابة نص الإعلان'); return; }
+        try {
+            await fetch(ALERTS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ badgeNumber: '0000', category: 'إعلان عام', message: text, recipient: 'الجميع' })
+            });
+            document.getElementById('bannerTextContent').innerText = text;
+            document.getElementById('announcementStatus').innerText = '✅ تم نشر الإعلان بنجاح!';
+            document.getElementById('globalAnnouncementInput').value = '';
+        } catch(e){ alert('خطأ'); }
+    }
+
+    async function loadLocations() {
+        try {
+            const res = await fetch(LOC_URL);
+            const data = await res.json();
+            const locs = data.locations || [];
+            const selects = document.querySelectorAll('.location-list');
+            selects.forEach(sel => {
+                sel.innerHTML = '<option value="">-- اختر الموقع --</option>';
+                locs.forEach(l => { sel.innerHTML += `<option value="${l}">${l}</option>`; });
+            });
+        } catch(e) {}
+    }
+
+    async function addNewLocation() {
+        const val = document.getElementById('newLocInput').value.trim();
+        if (!val) { alert('أدخل اسم الموقع'); return; }
+        try {
+            const res = await fetch(LOC_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ newLocation: val })
+            });
+            if (res.ok) {
+                document.getElementById('newLocMsg').innerText = '✅ تم إضافة الموقع بنجاح!';
+                document.getElementById('newLocInput').value = '';
+                loadLocations();
+            }
+        } catch(e){}
+    }
+
+    document.getElementById('empForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const checkedBoxes = Array.from(document.querySelectorAll('input[name="healthCond"]:checked')).map(cb => cb.value);
+        const otherText = document.getElementById('otherHealthText').value.trim();
+        if (otherText) { checkedBoxes.push(otherText); }
+        
+        const healthSummary = checkedBoxes.length > 0 ? checkedBoxes.join(' + ') : 'سليم / Healthy';
+
+        const data = {
+            badgeNumber: document.getElementById('empBadge').value,
+            fullName: document.getElementById('empName').value,
+            nationality: document.getElementById('empNationality').value,
+            role: document.getElementById('empRole').value,
+            currentLocation: document.getElementById('empLocation').value,
+            allergies: healthSummary
+        };
+        const res = await fetch(API_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) });
+        if (res.ok) {
+            document.getElementById('empMsg').innerText = '✅ تم حفظ الموظف! يمكنك الآن الدخول برقم الباج.';
+            document.getElementById('empForm').reset();
+        }
+    });
+
+    document.getElementById('driverRegForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = {
+            badgeNumber: document.getElementById('regDriverBadge').value,
+            fullName: document.getElementById('regDriverName').value,
+            nationality: document.getElementById('driverNationality').value,
+            role: `سائق (${document.getElementById('driverShift').value})`,
+            currentLocation: 'المفقس 1',
+            allergies: 'سليم / Healthy'
+        };
+        const res = await fetch(API_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) });
+        document.getElementById('driverRegMsg').innerText = res.ok ? '✅ تم تسجيل السائق بنجاح!' : 'خطأ';
+    });
+
+    async function loginDriver() {
+        const badge = document.getElementById('loginDriverBadge').value;
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        const user = data.users.find(u => String(u.badgeNumber) === badge);
+        if (user) {
+            document.getElementById('driverCardName').innerText = user.fullName;
+            document.getElementById('driverCardBox').style.display = 'block';
+        } else {
+            alert('السائق غير مسجل');
+        }
+    }
+
+    async function saveDriverConfig() {
+        const badge = document.getElementById('loginDriverBadge').value;
+        const location = document.getElementById('driverDailyLoc').value;
+        const res = await fetch(`${API_URL}/update-location`, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ badgeNumber: badge, currentLocation: location })
+        });
+        document.getElementById('driverConfigMsg').innerText = res.ok ? '✅ تم تحديث الموقع اليومي!' : 'خطأ';
+    }
+
+    async function loadAdminPanel() {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        globalUsers = data.users || [];
+
+        const resAlerts = await fetch(ALERTS_URL);
+        const dataAlerts = await resAlerts.json();
+        globalAlerts = (dataAlerts.alerts || []).filter(a => a.category !== 'إعلان عام');
+
+        renderWhatsAppContacts(globalAlerts);
+
+        const total = globalUsers.length;
+        const healthy = globalUsers.filter(u => !u.allergies || u.allergies.includes('سليم') || u.allergies.includes('Healthy') || u.allergies === 'لا يوجد').length;
+        const chronic = total - healthy;
+        
+        if (total > 0) {
+            document.getElementById('barHealthy').style.width = (healthy / total * 100) + '%';
+            document.getElementById('barChronic').style.width = (chronic / total * 100) + '%';
+        }
+
+        document.getElementById('cnt_all').innerText = total;
+        document.getElementById('cnt_bp').innerText = globalUsers.filter(u => u.allergies && u.allergies.includes('ضغط')).length;
+        document.getElementById('cnt_sug').innerText = globalUsers.filter(u => u.allergies && u.allergies.includes('سكر')).length;
+        document.getElementById('cnt_asthma').innerText = globalUsers.filter(u => u.allergies && u.allergies.includes('ربو')).length;
+        document.getElementById('cnt_ulcer').innerText = globalUsers.filter(u => u.allergies && u.allergies.includes('قرحة')).length;
+        document.getElementById('cnt_pen').innerText = globalUsers.filter(u => u.allergies && u.allergies.includes('بنسلين')).length;
+        document.getElementById('cnt_dic').innerText = globalUsers.filter(u => u.allergies && u.allergies.includes('ديكلوفيناك')).length;
+        document.getElementById('cnt_oth').innerText = globalUsers.filter(u => u.allergies && u.allergies.includes('أخرى')).length;
+
+        filterByCategory(currentSelectedCategory, null);
+    }
+
+    function renderWhatsAppContacts(alerts, searchQuery = '') {
+        const listContainer = document.getElementById('whatsappContactsList');
+        const sendersMap = new Map();
+        alerts.forEach(a => {
+            if (a.badgeNumber !== '0000' && !sendersMap.has(a.badgeNumber)) {
+                sendersMap.set(a.badgeNumber, { badge: a.badgeNumber, name: a.senderName, category: a.category, lastMsg: a.message });
+            }
+        });
+
+        let html = '';
+        sendersMap.forEach(contact => {
+            if (searchQuery && !contact.name.toLowerCase().includes(searchQuery.toLowerCase()) && !contact.badge.includes(searchQuery)) return;
+            let activeClass = (activeChatBadge === contact.badge) ? 'active' : '';
+            html += `
+                <div class="chat-contact-item ${activeClass}" onclick="openChat('${contact.badge}', '${contact.name}')">
+                    <div style="font-weight: bold; color: #2c3e50;">${contact.name}</div>
+                    <div style="font-size: 11px; color: #666;">Badge: ${contact.badge}</div>
+                    <div style="font-size: 12px; color: #444; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px;">${contact.lastMsg}</div>
+                </div>
+            `;
+        });
+        listContainer.innerHTML = html || '<div style="padding: 15px; text-align: center; color: #777;">لا توجد مراسلات حالياً</div>';
+    }
+
+    function filterWhatsAppChats() {
+        const query = document.getElementById('chatSearchInput').value.trim();
+        renderWhatsAppContacts(globalAlerts, query);
+    }
+
+    function openChat(badge, name) {
+        activeChatBadge = badge;
+        document.getElementById('activeChatHeader').innerText = `💬 محادثة: ${name} (Badge: ${badge})`;
+        document.getElementById('whatsappInputBox').style.display = 'flex';
+        renderWhatsAppContacts(globalAlerts, document.getElementById('chatSearchInput').value.trim());
+
+        const userObj = globalUsers.find(u => String(u.badgeNumber).trim() === String(badge).trim());
+        const profilePanel = document.getElementById('chatUserProfilePanel');
+        if (userObj) {
+            profilePanel.innerHTML = `
+                <h4 style="margin-top:0; color: var(--primary); border-bottom: 1px solid #ccc; padding-bottom: 5px;">📋 الملف الطبي</h4>
+                <p><strong>👤 الاسم:</strong> ${userObj.fullName}</p>
+                <p><strong>🆔 الباج:</strong> ${userObj.badgeNumber}</p>
+                <p><strong>🌍 الجنسية:</strong> ${userObj.nationality}</p>
+                <p><strong>💼 الصفة:</strong> ${userObj.role}</p>
+                <p><strong>📍 الموقع:</strong> ${userObj.currentLocation}</p>
+                <p><strong>🩺 الحالة الصحية:</strong> <br><span style="color:red; font-weight:bold; background:#fadbd8; padding:3px 6px; display:inline-block; margin-top:4px; border-radius:4px;">${userObj.allergies}</span></p>
+                <button onclick="generateSingleReport('${userObj.id}')" class="btn-info" style="width:100%; margin-top:10px; font-size:12px;">📄 تقريره الفردي PDF</button>
+            `;
+        }
+
+        const userMsgs = globalAlerts.filter(a => a.badgeNumber === badge || (a.recipient === badge && a.badgeNumber === '0000'));
+        let msgAreaHtml = '';
+        userMsgs.forEach(m => {
+            let bubbleClass = m.category === 'غرفة الطبابة' ? 'wa-bubble-outgoing' : 'wa-bubble-incoming';
+            msgAreaHtml += `
+                <div class="wa-bubble ${bubbleClass}">
+                    <strong>${m.senderName}:</strong> ${m.message}
+                    <div style="font-size: 10px; color: #888; text-align: left; margin-top: 3px;">${m.timestamp}</div>
+                </div>
+            `;
+        });
+        document.getElementById('whatsappMessagesArea').innerHTML = msgAreaHtml || '<div style="text-align:center;">لا توجد رسائل</div>';
+    }
+
+    async function sendAdminReply() {
+        const text = document.getElementById('adminReplyMsgText').value.trim();
+        if (!text || !activeChatBadge) { alert('اكتب رد'); return; }
+        try {
+            await fetch(ALERTS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ badgeNumber: '0000', category: 'غرفة الطبابة', message: `[رد الطبابة]: ${text}`, recipient: activeChatBadge })
+            });
+            document.getElementById('adminReplyMsgText').value = '';
+            loadAdminPanel();
+            openChat(activeChatBadge, 'مرسل');
+        } catch(e){}
+    }
+
+    async function searchByBadgeEngine() {
+        const query = document.getElementById('searchBadgeInput').value.trim();
+        const box = document.getElementById('searchBadgeResultBox');
+        if (!query) { box.style.display = 'none'; return; }
+        const found = globalUsers.find(u => String(u.badgeNumber).trim() === query);
+        box.style.display = 'block';
+        if (found) {
+            box.innerHTML = `
+                <strong>✅ تم العثور على الموظف:</strong><br><br>
+                👤 الاسم: <strong>${found.fullName}</strong><br>
+                🆔 الباج: <strong>${found.badgeNumber}</strong><br>
+                🌍 الجنسية: <strong>${found.nationality}</strong><br>
+                💼 الصفة: ${found.role}<br>
+                📍 الموقع: ${found.currentLocation}<br>
+                🩺 الحالة الصحية: <span style="color:red; font-weight:bold;">${found.allergies}</span><br><br>
+                <button onclick="generateSingleReport('${found.id}')" class="btn-info">📄 تقرير PDF</button>
+            `;
+        } else {
+            box.innerHTML = `❌ لا يوجد سجل بهذا الرقم (${query})`;
+        }
+    }
+
+    function filterByCategory(category, btnElement) {
+        currentSelectedCategory = category;
+        document.getElementById('currentFilterTitle').innerText = `عرض الفئة: (${category})`;
+        if (btnElement) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+        if (category === 'الكل') {
+            currentCategoryFiltered = globalUsers;
+        } else {
+            currentCategoryFiltered = globalUsers.filter(u => u.allergies && u.allergies.includes(category));
+        }
+        renderTable(currentCategoryFiltered);
+    }
+
+    function renderTable(list) {
+        let tableHtml = '';
+        list.forEach(u => {
+            tableHtml += `
+                <tr>
+                    <td><strong>${u.badgeNumber}</strong></td>
+                    <td>${u.fullName}</td>
+                    <td>${u.nationality}</td>
+                    <td>${u.role}</td>
+                    <td>${u.currentLocation}</td>
+                    <td>${u.allergies}</td>
+                    <td class="no-print" style="display: flex; gap: 5px;">
+                        <button onclick="generateSingleReport('${u.id}')" class="btn-info">📄 تقرير</button>
+                        <button onclick="deleteUser('${u.id}')" class="btn-danger">🗑️ حذف</button>
+                    </td>
+                </tr>
+            `;
+        });
+        document.getElementById('usersTableBody').innerHTML = tableHtml || '<tr><td colspan="7" style="text-align:center;">لا توجد سجلات مطابقة</td></tr>';
+    }
+
+    function generateSingleReport(userId) {
+        const u = globalUsers.find(user => user.id === userId);
+        if (!u) return;
+        document.getElementById('rptId').innerText = Math.floor(100000 + Math.random() * 900000);
+        document.getElementById('rptName').innerText = u.fullName;
+        document.getElementById('rptBadge').innerText = u.badgeNumber;
+        document.getElementById('rptNationality').innerText = u.nationality;
+        document.getElementById('rptRole').innerText = u.role;
+        document.getElementById('rptLoc').innerText = u.currentLocation;
+        document.getElementById('rptHealth').innerText = u.allergies;
+        document.getElementById('rptDate').innerText = new Date().toLocaleDateString('ar-EG');
+        document.getElementById('printableArea').style.display = 'none';
+        document.getElementById('singleReportCard').style.display = 'block';
+    }
+
+    function closeSingleReport() {
+        document.getElementById('singleReportCard').style.display = 'none';
+        document.getElementById('printableArea').style.display = 'block';
+    }
+
+    async function deleteUser(id) {
+        if (confirm('تأكيد حذف السجل؟')) {
+            const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+            if (res.ok) loadAdminPanel();
+        }
+    }
+
+    async function clearChatArchive() {
+        if (confirm('تأكيد تفريغ المحادثات؟')) {
+            await fetch(`${ALERTS_URL}/clear`, { method: 'DELETE' });
+            loadAdminPanel();
+            document.getElementById('whatsappMessagesArea').innerHTML = '<div style="text-align: center; color: #777; margin-top: 50px;">تم تفريغ السجل بنجاح</div>';
+        }
+    }
+</script>
+
+</body>
+</html>
